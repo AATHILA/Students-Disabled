@@ -64,6 +64,9 @@
         }
     </style>
     <script>
+    
+
+
      function playWelcomeMessage() {
         setTimeout(function () {
             var welcomeMessage = new SpeechSynthesisUtterance('Welcome to Chatbot. How can I assist you?');
@@ -86,22 +89,7 @@
     window.onbeforeunload = function() {
       stopVoice();
     };
-    function speakResponse() {
-    const responseText = document.querySelector("#chatBox").textContent.trim();
-    const speech = new SpeechSynthesisUtterance();
-    speech.text = responseText;
-    speech.volume = 1;
-    speech.rate = 1;
-    speech.pitch = 1;
-
-    window.speechSynthesis.speak(speech);
-}
-
-// Call the function when needed
-speakResponse();
-// Call the function when needed
-speakResponse();
-
+   
 
     function stopVoice() {
       if (speechSynthesisUtterance && 'speechSynthesis' in window) {
@@ -115,7 +103,7 @@ speakResponse();
     };
     </script>
 </head>
-<body onload="playWelcomeMessage()">
+<body onload="playWelcomeMessage()" >
 {% load static %}
 <div class="bg-video">
         <!-- Replace 'video.mp4' with your video file -->
@@ -127,8 +115,8 @@ speakResponse();
     <div class="overlay"></div>
     <div class="container">
         <div class="chat-container">
-            <div class="chat-box" id="chatBox" >
-                <div class="bot-message" id="bot-message">
+            <div class="chat-box" id="chatBox" name="resultText">
+                <div class="bot-message" id="bot-message" name="resultText"   >
                     <p>Welcome to Chatbot. How can I assist you?</p>
                 </div>
             </div>
@@ -143,6 +131,21 @@ speakResponse();
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+var speechSynthesisUtterance;
+
+function startVoice(text) {
+    if ('speechSynthesis' in window) {
+        speechSynthesisUtterance = new SpeechSynthesisUtterance(text);
+        speechSynthesisUtterance.lang = 'en-US';
+        window.speechSynthesis.speak(speechSynthesisUtterance);
+    } else {
+        alert('Text-to-speech is not supported in your browser.');
+    }
+}
+
+
+
         $(document).ready(function() {
             $('#chatForm').submit(function(event) {
                 event.preventDefault();
@@ -162,8 +165,11 @@ speakResponse();
                     success: function(response) {
                         // Display bot response
                         $('#chatBox').append('<div class="bot-message"><p>' + response.response + '</p></div>');
+
                         $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+                        startVoice(response.response)
                     },
+
                     error: function(xhr, status, error) {
                         console.error(error);
                     }
@@ -179,16 +185,17 @@ speakResponse();
 
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().replace(/\s/g, '');
+            transcript = transcript.split(" ").join(" ");
             console.log(transcript)
-            if (transcript.includes('chatbot')) {
+            if (transcript.includes('start')) {
                 usernameInput.focus();
-            } else if (transcript.includes('send')) {
+            } else if (transcript.includes('submit')) {
                 sendBtn.click();
             } else if (transcript.includes('back')) {
               window.location.href = '{% url "sh" %}';
             } else {
                 if (usernameInput === document.activeElement) {
-                    usernameInput.value = transcript.toUpperCase();
+                    usernameInput.value = transcript.toLowerCase();
                 }
             }
         };
