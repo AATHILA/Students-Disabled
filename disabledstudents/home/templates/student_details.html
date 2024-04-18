@@ -81,19 +81,19 @@
             
             <tbody>
         
-            {% if st.disability == "Hearing Impairment" %}
-                {% for i in dataimg %}
+            {% if  st.disability == "Visual Impairment" %}
+                <!-- {% for i in dataimg %}
                 <tr>
                      <td>{{forloop.counter}}</td>
                     {% comment %} {% if data.question.text %} {% endcomment %}
                     <td><img src="{{ i.question.files.url }}" alt="Question Image" style="max-width: 100%; height: 80px;"></td>
-                    <!-- <td>{{i.answer.text}}</td> -->
+                   
                     <td>{{i.answer.is_correct}}</td>
-                    <!-- <td>{{file.score}}</td> -->
-                    <!-- <td>{{i.student.category}}</td> -->
+                 
+                    <td></td>
                 </tr>
-                {% endfor %}
-             {% elif st.disability == "Visual Impairment"  %}   
+                {% endfor %} -->
+               
                {% for i in dataaudio %}
                 <tr>
                     <td>{{forloop.counter}}</td>
@@ -126,6 +126,15 @@
             
            
         </table>
+          {% if  st.disability == "Visual Impairment" %}
+        <div>
+            <a class="btn btn-danger" href="{% url 'delaudio' st.id %}" style="margin-left: 90%;">Delete</a>
+        </div>
+        {% else %}
+        <div>
+            <a class="btn btn-danger" href="{% url 'deldet' st.id %}" style="margin-left: 90%;">Delete</a>
+        </div>
+        {% endif %}
     </div>
     {% endblock det %}
       

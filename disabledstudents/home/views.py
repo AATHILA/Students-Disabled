@@ -70,7 +70,7 @@ class SD(TemplateView):
           print(id)
           context['st']=Student.objects.get(id=id)
           context['data']=StudentAnswer.objects.filter(student=id)
-          context['dataimg']=StudentAnswerImage.objects.filter(student=id)
+        #   context['dataimg']=StudentAnswerImage.objects.filter(student=id)
           context['dataaudio']=StudentAnswerAudio.objects.filter(student=id)
           context['file']=ScoreModel.objects.filter(student=id)
           print(context)
@@ -111,3 +111,23 @@ class DeleteViewNotes(View):
        dl=Notes.objects.get(id=id)
        dl.delete()
        return redirect('note')
+
+class DeleteViewExamDetails(View):
+    def get(self,req,*args,**kwargs):
+    #    user=req.user.id
+    #    print(user)
+       id=kwargs.get('pk')
+       print(id)
+       dl=StudentAnswer.objects.filter(student=id)
+       dl.delete()
+       return redirect('score')
+
+class DeleteViewExamDetailsAudio(View):
+    def get(self,req,*args,**kwargs):
+    #    user=req.user.id
+    #    print(user)
+       id=kwargs.get('pk')
+       print(id)
+       dl=StudentAnswerAudio.objects.filter(student=id)
+       dl.delete()
+       return redirect('score')

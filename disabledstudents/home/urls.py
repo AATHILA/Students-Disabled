@@ -13,4 +13,6 @@ urlpatterns = [
     path('sd/<int:pk>/',SD.as_view(),name='sd'),
     path('notes/',NotesView.as_view(),name='note'),
     path('del/<int:pk>/',DeleteViewNotes.as_view(),name='d'),
+    path('deldetails/<int:pk>/',DeleteViewExamDetails.as_view(),name='deldet'),
+    path('deldetailsaudio/<int:pk>/',DeleteViewExamDetailsAudio.as_view(),name='delaudio'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

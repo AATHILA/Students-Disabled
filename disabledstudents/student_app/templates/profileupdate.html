@@ -142,7 +142,7 @@ exit_to_app
             </div>
             <div class="text-center">
                 <div class="row mt-3 ml-1">
-                    <div class="col"><button id="cnfrmbtn" class="btn btn-block btn-success">Confirm</button></div>
+                    <div class="col"><button class="btn btn-block btn-success">Confirm</button></div>
                     <div class="col"></div>
                     <!-- <div class="col"></div> -->
                 </div>
@@ -157,15 +157,9 @@ exit_to_app
         const welcomeMessage = new SpeechSynthesisUtterance('welcome profile update');
         window.speechSynthesis.speak(welcomeMessage);
         }
-        function speakMessage(msg) {
-            const message = new SpeechSynthesisUtterance(msg);
-            window.speechSynthesis.speak(message);
-            }
-
    playWelcomeMessage();
     </script>
     <script>
-        
         var recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.lang = 'en-US';
@@ -209,20 +203,16 @@ exit_to_app
               // Redirect to the home page
               window.location.href = '{% url "cp" %}';
           }
-          //else if (result.includes('go to games')) {
+          else if (result.includes('go to games')) {
               // Redirect to the home page
-            //  window.location.href = '{% url "game" %}';
-         // }
+              window.location.href = '{% url "game" %}';
+          }
           else if (result.includes('go to explore more')) {
               // Redirect to the home page
               window.location.href = '{% url "noteview" request.user.student_id.id %}';
           }
-          else if(result.includes('confirm')){
-            $("#cnfrmbtn").click();
-            speakMessage('Profile Updated Successfully');
-          }
         
-        
+         
       };
        recognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);

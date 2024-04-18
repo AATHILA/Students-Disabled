@@ -23,7 +23,7 @@ from langchain import PromptTemplate
 @csrf_exempt
 def chatbot_view(request):
     if request.method == 'POST':
-        openai_api_key = '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'
+        openai_api_key = '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'
         llm = OpenAI(openai_api_key=openai_api_key, temperature=0.8)
 
         input_text = request.POST.get('input_text', '')
@@ -342,6 +342,7 @@ class SugView(TemplateView):
       context = super().get_context_data(**kwargs) 
       id=self.request.user.id
       context['data']=ScoreModel.objects.filter(student=id)
+      context['data1']=Student.objects.get(id=id)
       return context
    
 class ResultView(TemplateView):
@@ -403,21 +404,10 @@ class Audio(TemplateView):
       context = super().get_context_data(**kwargs) 
       id=self.request.user.id
       context['data']=ScoreModel.objects.filter(student=id)
+      context['data1']=Student.objects.get(id=id)
       return context
 
-import pygame    
-def play_audio(file_path):
-    pygame.init()
 
-    try:
-        pygame.mixer.init()
-        pygame.mixer.music.load(file_path)
-        pygame.mixer.music.play()
-    except pygame.error as e:
-        print(f"Error loading or playing audio: {e}")
-         #   for i in context['data']:
-        #     print(i.file)
-        #     play_audio(i.file.path)
 
 class NotesListView(TemplateView):
     template_name='notesview.html'    

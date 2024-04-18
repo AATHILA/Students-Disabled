@@ -3,14 +3,11 @@ from django.contrib.auth.models import User,AbstractUser
 # Create your models here.
 
 
-
-
-
 class Student(models.Model):
     std_id=models.CharField(unique=True,max_length=50)
     first_name=models.CharField(max_length=100,null=True,blank=True)
     last_name=models.CharField(max_length=100,null=True,blank=True)
-    email=models.EmailField(null=True)
+    email=models.EmailField(null=True,blank=True)
     img=models.FileField(upload_to="student image",null=True,blank=True)
     options=( 
         ("Male","Male"),
@@ -22,9 +19,9 @@ class Student(models.Model):
     d_type=(
         ("Mobility Impairment","Mobility Impairment"), #any full
         ("Visual Impairment","Visual Impairment"),  #audio
-       # ("Hearing Impairment","Hearing Impairment"), #image
+        ("Hearing Impairment","Hearing Impairment"), #image
         ("Learning Disability","Learning Disability"), #any
-        #("Autism Spectrum Disorder","Autism Spectrum Disorder"), #any
+        ("Autism Spectrum Disorder","Autism Spectrum Disorder"), #any
         ("Speech Impairment","Speech Impairment"), #any
         ("Intellectual Disability","Intellectual Disability"), #any
     )
@@ -32,12 +29,12 @@ class Student(models.Model):
     a_techno=(
         ("Screen Reader","Screen Reader"),
         ("Communication App","Communication App"),
-       # ("Hearing Aids","Hearing Aid"),
+        ("Hearing Aids","Hearing Aid"),
         ("Voice Recognition","Voice Recognition"),
-        #("Wheelchair","Wheelchair"),
+        ("Wheelchair","Wheelchair"),
         ("Assistive Learning Tools","Assistive Learning Tools"),
         ("Text-to-Speech Software","Text-to-Speech Software"),
-        #("Augmentative and Alternative Communication (AAC) Device","Augmentative and Alternative Communication (AAC) Device"),
+        ("Augmentative and Alternative Communication (AAC) Device","Augmentative and Alternative Communication (AAC) Device"),
     )
     accesstechnology=models.CharField(max_length=200,choices=a_techno,default="Screen Reader")
     # score = models.IntegerField(blank=True,null=True)

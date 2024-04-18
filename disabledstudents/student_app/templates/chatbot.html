@@ -185,11 +185,10 @@ function startVoice(text) {
 
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().replace(/\s/g, '');
-            transcript = transcript.split(" ").join(" ");
             console.log(transcript)
             if (transcript.includes('start')) {
                 usernameInput.focus();
-            } else if (transcript.includes('submit')) {
+            } else if (transcript.includes('send')) {
                 sendBtn.click();
             } else if (transcript.includes('back')) {
               window.location.href = '{% url "sh" %}';

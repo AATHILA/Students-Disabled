@@ -44,15 +44,21 @@ exit_to_app
 </span></a></div>
     </nav>
     <nav class="navbar  navbar-expand-lg text-center" style="margin-left: 35%;">
+     {% if data1.disability == 'Visual Impairment' %}
+      <div>
+            <h5 class="mr-2 ml-1 mt-3 btn text-center" style="text-align: left; letter-spacing: 2px;font-family: 'Times New Roman', Times, serif;" > <a  style="text-decoration: none;color: #000;" href="{% url 'audio' %}"> Audio</a></h5>
+        </div>
+        {% else %}
             <div> 
                 <h5 class="mr-2 ml-5 mt-3 btn" style="text-align: left; letter-spacing: 2px;font-family: 'Times New Roman', Times, serif; " > <a style="text-decoration: none;color: #000;"  href="{% url 'sug' %}" > Video </a></h5>
             </div> 
-            <div>
+           <div>
             <h5 class="mr-2 ml-1 mt-3 btn" style="text-align: left; letter-spacing: 2px;font-family: 'Times New Roman', Times, serif;" > <a  style="text-decoration: none;color: #000;" href="{% url 'audio' %}"> Audio</a></h5>
         </div>
             <div>
             <h5 class="mr-2 ml-1 mt-3 btn" style="text-align: left; letter-spacing: 2px;font-family: 'Times New Roman', Times, serif;" > <a style="text-decoration: none;color: #000;" href="{% url 'text' %}"> Some text For You!! </a></h5>
         </div>
+        {% endif %}
     </nav>
     <hr>
     {% block sug %}

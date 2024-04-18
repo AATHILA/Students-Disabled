@@ -28,7 +28,7 @@
             var welcomeMessage = new SpeechSynthesisUtterance('Please log in using your username and password.');
             window.speechSynthesis.speak(welcomeMessage);
         }, 1000); // 1000 milliseconds delay (adjust as needed)
-    } 
+    }
         function playWelcomeMessage1() {
             setTimeout(function () {
     var welcomeMessage = new SpeechSynthesisUtterance('enter username');
@@ -61,7 +61,7 @@
             <form action="" method="post" > 
                 {% csrf_token %}
                 <div class="mt-2">
-                    <input type="text"  class="form-control" name="username" id="username" placeholder="Username" style="border-radius: 0.75rem;" required onfocus="playWelcomeMessage1();">
+                    <input type="text"  class="form-control" name="username" id="username" placeholder="Username" style="border-radius: 0.75rem;" required onfocus="playWelcomeMessage1()">
                 </div>
                 <div class="mt-2">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password" style="border-radius: 0.75rem;" required onfocus="playWelcomeMessage2()">
@@ -85,7 +85,6 @@
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().replace(/\s/g, '');
             console.log(transcript)
-            
             if (transcript.includes('username')) {
                 usernameInput.focus();
             } else if (transcript.includes('password')) {

@@ -67,7 +67,7 @@ background: linear-gradient(90deg, rgba(40,37,82,1) 0%, rgba(2,193,232,1) 100%);
     {% comment %} <div  style="margin-left:35%;">
         <h4 class="mr-2 ml-5"><a href="{% url 'game' %}"  style="text-align: left; letter-spacing: 2px;font-family:fantasy;text-decoration: none;color: white;">Games </a></h4>
     </div> {% endcomment %}
-    <div  style="margin-left:35%;" >
+    <div style="margin-left:45%;">
         <h4 class="mr-2 ml-5"><a href="{% url 'noteview' user.student_id.id %}"  style="text-align: left; letter-spacing: 2px;font-family:fantasy;text-decoration: none;color: white;">Explore More </a></h4>
     </div>
     <div >
@@ -168,8 +168,8 @@ background: linear-gradient(90deg, rgba(40,37,82,1) 0%, rgba(2,193,232,1) 100%);
           <div class="card-body"  id="card2">
             {% if data.disability == 'Visual Impairment' %}
             <a href="{% url 'ansaudio'  %}" class="btn btn-info"   style="text-align: center; letter-spacing: 2px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Exam</a>
-            {% elif data.disability == 'Hearing Impairment' %}
-                          <a href="{% url 'ansimg'  %}" class="btn btn-info"   style="text-align: center; letter-spacing: 2px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Exam</a>
+            {% comment %} {% elif data.disability == 'Hearing Impairment' %}
+                          <a href="{% url 'ansimg'  %}" class="btn btn-info"   style="text-align: center; letter-spacing: 2px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Exam</a> {% endcomment %}
             {% else %}
                         <a href="{% url 'ans'  %}" class="btn btn-info"   style="text-align: center; letter-spacing: 2px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Exam</a>
             {% endif %}
@@ -180,9 +180,15 @@ background: linear-gradient(90deg, rgba(40,37,82,1) 0%, rgba(2,193,232,1) 100%);
      <div class="row ml-3 mt-4" style="width: 98%;"> -->
       <div class="col-sm-3">
         <div class="card" >
+         {% if data.disability == 'Visual Impairment' %}
+          <div class="card-body" id="card3">    
+            <a href="{% url 'audio' %}" class="btn btn-info" style="text-align: center; letter-spacing: 1px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Suggestion</a>
+          </div>
+          {% else %}
           <div class="card-body" id="card3">    
             <a href="{% url 'sug' %}" class="btn btn-info" style="text-align: center; letter-spacing: 1px;font-family:'Times New Roman', Times, serif;padding:60px 60px;width: 100%;font-weight: bold;font-size: larger;">Suggestion</a>
           </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-sm-3">

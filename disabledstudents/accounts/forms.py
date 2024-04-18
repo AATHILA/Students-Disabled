@@ -10,14 +10,13 @@ class LogForm(forms.Form):
     password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password","class":"form-control","style":"border-radius: 0.75rem; "}))
 
 
-
-
 class StudentForm(forms.ModelForm):
      class Meta:
           model=Student
           exclude=['score','category','suggestion','video','audio']
           widgets={
                'std_id':forms.TextInput(attrs={"placeholder":"Student Id","class":"form-control","style":"border-radius: 0.75rem; "}),
+               'first_name':forms.TextInput(attrs={"placeholder":"Name","class":"form-control","style":"border-radius: 0.75rem; "}),
                'gender':forms.RadioSelect(),
                'age':forms.NumberInput(attrs={"placeholder":"Age","class":"form-control","style":"border-radius: 0.75rem; "}),
           
@@ -27,8 +26,6 @@ class UserRegForm(UserCreationForm):
      class Meta:
           model=User
           fields=['username','password1']          
-
-
      
 class QuesForm(forms.ModelForm):
      class Meta:

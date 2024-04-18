@@ -23,6 +23,8 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 
+
+
 class MainHome(TemplateView):
     template_name="mainhome.html"
 
@@ -128,7 +130,7 @@ def AssignView(request,**kwargs):
         tests = Question.objects.all()
 
         # Get all students
-        students = Student.objects.filter(disability__in=["Mobility Impairment", "Learning Disability", "Autism Spectrum Disorder", "Speech Impairment", "Intellectual Disability"])
+        students = Student.objects.filter(disability__in=["Mobility Impairment", "Learning Disability", "Autism Spectrum Disorder", "Speech Impairment", "Intellectual Disability","Hearing Impairment"])
         students_with_email_sent = set()
         # Assign all tests to all students
         for test in tests:
