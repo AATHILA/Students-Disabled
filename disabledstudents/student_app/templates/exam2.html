@@ -239,7 +239,7 @@ window.onbeforeunload = function() {
         // Redirect to the home page
         window.location.href = '{% url "sh" %}';
     }
-    else if (result.includes('start')) {
+    else if (result.includes('start')||result.includes('question 1')) {
         // Start playing questions and answers
         playNext(0);
     } else if (result.includes('question 2')) {
