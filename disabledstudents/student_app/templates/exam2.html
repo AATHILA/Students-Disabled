@@ -275,6 +275,19 @@ window.onbeforeunload = function() {
         submitForm();
     } else if (result.includes('option')) {
     // Example: If the user says "option 1", "option 2", etc.
+    console.log(result);
+
+    if(result.includes('option a')){
+      result="option 1";
+    }else if (result.includes('option b')){
+      result="option 2";
+    }else if (result.includes('option c')){
+      result="option 3";
+    }
+    else if (result.includes('option d')){
+      result="option 4";
+    }
+    
       var optionNumberMatch = result.match(/\d+/);
 
       if (optionNumberMatch) {
@@ -286,7 +299,10 @@ window.onbeforeunload = function() {
 
           console.log('Option number not recognized in the result:', result);
       }
-    } else if (result.includes('select') && result.includes('option')) {
+    } 
+   
+    
+    else if (result.includes('select') && result.includes('option')) {
         // Handle other variations of selecting options
         // You may customize this based on your expected voice commands
         selectAnswerFromVoiceCommand(result);
