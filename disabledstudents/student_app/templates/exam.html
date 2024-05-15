@@ -119,7 +119,7 @@
                     <form method="post" action="{% url 'submit_exam' %}">
                       {% for student_answer in student_answers %}   
                       <div class="card" style="padding: 15px;">
-                  {% if student_answer.student.disability == "Mobility Impairment"  or  student_answer.student.disability == "Learning Disability" or  student_answer.student.disability == "Autism Spectrum Disorder" or  student_answer.student.disability == "Speech Impairment" or  student_answer.student.disability == "Intellectual Disability" %}
+                  {% if student_answer.student.disability != "Visual Impairment"  %}
                     {% if student_answer.question.type.names == "Text" %}
                       {% csrf_token %}
                     <p>{{ forloop.counter }} . {{ student_answer.question.text }}</p>

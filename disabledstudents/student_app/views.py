@@ -59,11 +59,13 @@ class StuHomeView(TemplateView):
         context['data']=Student.objects.get(id=user)
         return context
 
-
+import random
 def studentanswer(request,**kwargs):
     if request.user.is_authenticated:
         student = request.user.student_id_id  
-        student_answers = StudentAnswer.objects.filter(student=student)
+        student_answers = list(StudentAnswer.objects.filter(student=student))
+        random.shuffle(student_answers)
+        
         num = range(1, 11)
         return render(request, 'exam.html', {'student_answers': student_answers,"num":num})
 

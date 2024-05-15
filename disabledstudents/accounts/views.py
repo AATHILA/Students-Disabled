@@ -23,7 +23,12 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 
+from django.contrib.auth import logout as auth_logout
 
+def custom_logout(request):
+    # Add any custom logout logic here
+    auth_logout(request)
+    return redirect('log')
 
 class MainHome(TemplateView):
     template_name="mainhome.html"

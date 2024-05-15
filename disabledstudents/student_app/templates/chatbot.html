@@ -186,17 +186,23 @@ function startVoice(text) {
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().replace(/\s/g, '');
             console.log(transcript)
-            if (transcript.includes('start')) {
+            if ((transcript.includes('start')) ||(transcript.includes('chat')) || (transcript.includes('chart'))) {
                 usernameInput.focus();
             } else if (transcript.includes('send')) {
                 sendBtn.click();
-            } else if (transcript.includes('back')) {
+            } else if (transcript.includes('back to home')) {
               window.location.href = '{% url "sh" %}';
-            } else {
+            } else if (transcript.includes('stop')){
+                window.speechSynthesis.cancel();
+
+            }
+            
+            else {
                 if (usernameInput === document.activeElement) {
                     usernameInput.value = transcript.toLowerCase();
                 }
             }
+            recognition.stop();
         };
 
         recognition.onend = () => {

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,700,0,200" />
 
-  <script>
+   <script>
     function playWelcomeMessage() {
       var welcomeMessage = new SpeechSynthesisUtterance('Welcome to Educational Website For Differently Abled Students');
       window.speechSynthesis.speak(welcomeMessage);
@@ -337,6 +337,11 @@ div #main{
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <h3 id="bt" class="mr-1 ml-4 btn nav-link" style="font-family:fantasy;">
+                        <a href="http://127.0.0.1:8000/admin/" style="text-align: left; letter-spacing: 2px;text-decoration: none;color: black;">Admin</a>
+                    </h3>
+                </li>
+                <li class="nav-item">
+                    <h3 id="bt" class="mr-1 ml-4 btn nav-link" style="font-family:fantasy;">
                         <a href="{% url 'login' %}" style="text-align: left; letter-spacing: 2px;text-decoration: none;color: black;">Faculty</a>
                     </h3>
                 </li>
@@ -486,7 +491,7 @@ div #main{
     }
    
     
-  
+  recognition.stop();
    
 };
 

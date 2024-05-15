@@ -86,7 +86,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,19,53,1) 0%, rgba(94,94,147,1) 0%, rgba(1,239,236,1) 100%); position: fixed; width: 100%;">
     <div>
-      <h2 class="mr-2 ml-5" style="text-align: left; letter-spacing: 2px; font-family: fantasy; font-weight: bold;">Questionnaire</h2>
+      <h2 class="mr-2 ml-5" style="text-align: left; letter-spacing: 2px; font-family: fantasy; font-weight: bold;" onclick="playWelcomeMessage();">Questionnaire</h2>
     </div>
     <div style="margin-left: 72%;">
       <!-- <h4 class="mr-2 ml-5"><a href="{% url 'voice' %}"  style="text-align: left; letter-spacing: 2px;font-family:fantasy;text-decoration: none;color: white;"><span class="material-symbols-rounded">
@@ -230,47 +230,51 @@ window.onbeforeunload = function() {
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.lang = 'en-US';
+  var currentQuestionIndex=0;
   
   recognition.onresult = function(event) {
     var result = event.results[event.results.length - 1][0].transcript.toLowerCase();
     console.log("result",result);
-    var currentQuestionIndex=0;
+  
      if (result.includes('back to home')) {
         // Redirect to the home page
         window.location.href = '{% url "sh" %}';
     }
-    else if (result.includes('start')||result.includes('question 1')) {
-        // Start playing questions and answers
-        playNext(0);
-    } else if (result.includes('question 2')) {
+   else if (result.includes('question 2')||result.includes('question two')) {
 
         playNext(1);
-    } else if (result.includes('question 3')) {
+    } else if (result.includes('question 3')||result.includes('question three')) {
         // Start playing questions and answers
         playNext(2);
-    } else if (result.includes('question 4')) {
+    } else if (result.includes('question 4')||result.includes('question four')||result.includes('question for')) {
         // Start playing questions and answers
         playNext(3);
-    } else if (result.includes('question 5')) {
+    } else if (result.includes('question 5')||result.includes('question five')) {
         // Start playing questions and answers
         playNext(4);
-    } else if (result.includes('question 6')) {
+    } else if (result.includes('question 6')||result.includes('question six')) {
         // Start playing questions and answers
         playNext(5);
-    } else if (result.includes('question 7')) {
+    } else if (result.includes('question 7') ||result.includes('question seven')) {
   
         playNext(6);
-    } else if (result.includes('question 8')) {
+    } else if (result.includes('question 8')||result.includes('question eight')) {
         // Start playing questions and answers
         playNext(7);
-    } else if (result.includes('question 9')) {
+    } else if (result.includes('question 9')||result.includes('question nine')) {
         // Start playing questions and answers
         playNext(8);
-    } else if (result.includes('question 10')) {
+    } else if (result.includes('question 10')||result.includes('question ten')) {
         // Start playing questions and answers
         playNext(9);
 
-    } else if (result.includes('submit')) {
+    } else if (result.includes('start')||result.includes('question 1')||result.includes('question one')) {
+      // Start playing questions and answers
+      playNext(0);
+  } 
+
+    
+     else if (result.includes('submit exam')) {
         // Submit the answers
         submitForm();
     } else if (result.includes('option')) {
@@ -307,6 +311,7 @@ window.onbeforeunload = function() {
         // You may customize this based on your expected voice commands
         selectAnswerFromVoiceCommand(result);
     } 
+    recognition.stop();
 };
 
 
@@ -330,6 +335,8 @@ var radioButtons;
 
   async function playNext(index) {
     if (index < questionAudios.length) {
+      console.log(questionAudios[index]);
+      questionAudios[index].scrollIntoView({behavior:'smooth'});
         await playAudio(questionAudios[index]);
         await playAnswers(answerSets[index], index);
         // Introduce a 10-second delay before playing the next question
@@ -365,6 +372,7 @@ async function playAnswers(answers, questionIndex) {
 
   async function playAudio(audioElement, optionNumber) {
     return new Promise((resolve) => {
+     
         audioElement.play();
         audioElement.addEventListener('ended', function onEnded() {
             audioElement.removeEventListener('ended', onEnded);

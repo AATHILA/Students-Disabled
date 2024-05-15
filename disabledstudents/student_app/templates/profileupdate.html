@@ -172,6 +172,8 @@ exit_to_app
         recognition.onresult = function(event) {
           var result = event.results[event.results.length - 1][0].transcript.toLowerCase();
           console.log("result",result);
+
+         
           var currentQuestionIndex=0;
            if (result.includes('back to home')) {
               // Redirect to the home page
@@ -253,7 +255,7 @@ else if(document.getElementById("id_email")==document.activeElement){
 
 
         }
-         
+        recognition.stop();
       };
        recognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);

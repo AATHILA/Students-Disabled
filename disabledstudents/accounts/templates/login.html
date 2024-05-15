@@ -40,6 +40,7 @@
     window.speechSynthesis.speak(welcomeMessage);
     },500);
 }
+   
     function stopVoice() {
       if (speechSynthesisUtterance && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -100,7 +101,8 @@
                     passwordInput.value = transcript;
                 }
             }
-        };
+            recognition.stop();
+        }; 
 
         recognition.onend = () => {
             recognition.start();
@@ -110,6 +112,7 @@
         window.addEventListener('load', () => {
             recognition.start();
         });
+        playWelcomeMessage() ;
     </script>
 </body>
 

@@ -49,6 +49,8 @@ class Student(models.Model):
 class CustUser(AbstractUser):
     student_id=models.ForeignKey(Student,on_delete=models.CASCADE,related_name='cust',null=True)
     
+
+    
 class Types(models.Model):
     names=models.CharField(max_length=100)    
 

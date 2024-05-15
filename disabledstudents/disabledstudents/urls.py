@@ -19,6 +19,10 @@ from django.urls import path,include
 from accounts.views import LoginView,MainHome
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import custom_logout
+
+admin.site.logout = custom_logout
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +30,6 @@ urlpatterns = [
     path('account/',include("accounts.urls")),
     path('home/',include("home.urls")),
     path('student/',include("student_app.urls")),
-    path('game/',include("games.urls"))
+    path('game/',include("games.urls")),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
